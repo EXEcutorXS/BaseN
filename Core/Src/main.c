@@ -145,7 +145,7 @@ static void MX_IWDG_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-/*
+
  int _write (int fd, char *ptr, int len)
  {
  HAL_UART_Transmit (&huart1, (uint8_t*) ptr, len, 1000);
@@ -157,7 +157,7 @@ static void MX_IWDG_Init(void);
  HAL_UART_Transmit (&huart1, (uint8_t*) &ch, 1, 100);
  return ch;
  }
- */
+
 void eraseNodeData ()
 {
 	for (int i = 0; i < MAX_NODES; ++i)
@@ -663,9 +663,10 @@ void ledNodeStatusIndication ()
 					float fTemp;
 					uint32_t temp = (HAL_GetTick () - nodes[i].lastContact) % 1000;
 					if (temp < 500)
-						fTemp = 1.0f + (float) temp / 250.0f;
+						fTemp = 1.0f + (float) temp / 125.0f;
 					else
-						fTemp = 5.0f - (float) temp / 250.0f;
+						fTemp = 9.0f - (float) temp / 125.0f;
+
 					wsMultiply (i + 1, fTemp);
 #endif
 #ifdef FASTBLINK_ANIMATION
@@ -2339,7 +2340,7 @@ int main(void)
 
 	UC1609_Init (&hspi2, CS_GPIO_Port, CS_Pin, CD_GPIO_Port, CD_Pin, 0, 0);
 
-	wsRefreshLeds (&htim2, TIM_CHANNEL_2);
+	wsInit (&htim2, TIM_CHANNEL_2);
 	uartInit (&huart1);
 	HAL_ADC_Start_DMA (&hadc1, (uint32_t*) &adc, 1);
 
@@ -2377,38 +2378,7 @@ int main(void)
 
 	if (HAL_GPIO_ReadPin (B2_GPIO_Port, B2_Pin) == GPIO_PIN_RESET)
 		screenMode = smModeSelect;
-	while (1)
-		{
-			static uint16_t cnt=0;
-			HAL_IWDG_Refresh (&hiwdg);
-			sprintf (string[0], "String 1 text");
-			sprintf (string[1], "Hello WOrld");
-			sprintf (string[2], "Yo nigga what");
-			sprintf (string[3], "De mysteris dom satanas");
-			sprintf (string[4], "String 5 text");
 
-
-			UC1609_SetPos (0, 0);
-			UC1609_PutString (string[0]);
-			UC1609_SetPos (0, 1);
-			UC1609_PutString (string[1]);
-			UC1609_SetPos (0, 2);
-			UC1609_PutString (string[2]);
-			UC1609_SetPos (0, 3);
-			UC1609_PutString (string[3]);
-			UC1609_SetPos (0, 4);
-			UC1609_PutString (string[4]);
-			UC1609_UpdateScreen();
-			for (int i = 0; i < 64; ++i) {
-					UC1609_Scroll(i);
-					HAL_Delay(30);
-			}
-			sprintf (string[5], "%d",cnt++);
-			UC1609_SetPos(0, 7);
-			UC1609_PutString (string[5]);
-
-
-		}
 	while (1)
 		{
 
