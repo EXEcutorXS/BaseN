@@ -20,6 +20,36 @@
 /* USER CODE END Header */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
+/* Menu levels
+ * Radio settings
+ * 	Frequency
+ * 	Bandwidth
+ * 	Spreading Factor
+ * 	Syncword
+ * 	Coding rate
+ * 	Preamble
+ * 	Power
+ *Base settings
+ *	Warning delay 1
+ *	Warning delay 2
+ *Node settings
+ *	Working interval
+ *	Use LED
+ *	Clean saved data
+ *Network settings
+ *	Refresh Network List
+ *	Select Network
+ *	Set WiFi Password
+ *	Set Server password
+ *	Set BaseID
+ *	Set Host
+ *Save Settings
+ *Info
+ *	Firmware->Messages->Uptime&Net->Graph
+ *
+ *
+ *
+ */
 #ifndef __MAIN_H
 #define __MAIN_H
 
@@ -111,6 +141,7 @@ typedef  enum screenModes{
 	smStatus,
 	smFirmware,
 	smMessageCounter,
+	smGraph,
 	smNodeAction,
 	smModeSelect
 
