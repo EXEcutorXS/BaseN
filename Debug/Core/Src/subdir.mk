@@ -5,6 +5,7 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../Core/Src/Logo.c \
 ../Core/Src/Network.c \
 C:/workspace/UC1609/UC1609.c \
 C:/workspace/common/common.c \
@@ -21,6 +22,7 @@ C:/workspace/sx127x/sx127x.c \
 C:/workspace/ws2812/ws2812.c 
 
 OBJS += \
+./Core/Src/Logo.o \
 ./Core/Src/Network.o \
 ./Core/Src/UC1609.o \
 ./Core/Src/common.o \
@@ -37,6 +39,7 @@ OBJS += \
 ./Core/Src/ws2812.o 
 
 C_DEPS += \
+./Core/Src/Logo.d \
 ./Core/Src/Network.d \
 ./Core/Src/UC1609.d \
 ./Core/Src/common.d \

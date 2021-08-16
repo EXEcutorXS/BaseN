@@ -1,3 +1,4 @@
+"./Core/Src/Logo.o"
 "./Core/Src/Network.o"
 "./Core/Src/UC1609.o"
 "./Core/Src/common.o"

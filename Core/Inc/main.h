@@ -20,36 +20,6 @@
 /* USER CODE END Header */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-/* Menu levels
- * Radio settings
- * 	Frequency
- * 	Bandwidth
- * 	Spreading Factor
- * 	Syncword
- * 	Coding rate
- * 	Preamble
- * 	Power
- *Base settings
- *	Warning delay 1
- *	Warning delay 2
- *Node settings
- *	Working interval
- *	Use LED
- *	Clean saved data
- *Network settings
- *	Refresh Network List
- *	Select Network
- *	Set WiFi Password
- *	Set Server password
- *	Set BaseID
- *	Set Host
- *Save Settings
- *Info
- *	Firmware->Messages->Uptime&Net->Graph
- *
- *
- *
- */
 #ifndef __MAIN_H
 #define __MAIN_H
 
@@ -64,16 +34,21 @@ extern "C" {
 /* USER CODE BEGIN Includes */
 #define BASE
 #define USE_EEPROM
+#define WAVE 0
+#define FASTBLINK 1
 
-#define MAX_NODES 8
-#define SAFE_INTERVAL 10
+#define BASE_SETTINGS_SHIFT 0x80
+#define NODE_SETTINGS_SHIFT 0x100
+#define MAX_NODES 32
+#define SAFE_INTERVAL 8
 #define MAX_BASEID 9999999
 #define WARNING_DELAY 650000
 #define SUPER_WARNING_DELAY 1250000
-#define NODE_INFO_HOLD_TIME 5000
+#define NODE_INFO_HOLD_TIME 15000
+#define DELAY_SELECTED_MARK 5000
+#define DELAY_SHOW_CONTACT  3000
 
-#define WAVE 0
-#define FASTBLINK 1
+
 
 #define RECEIVE_ANIMATION WAVE // WAVE or FASTBLINK
 
@@ -103,6 +78,10 @@ uint32_t encInc:1;
 uint32_t encDec:1;
 uint32_t encOk:1;
 uint32_t back:1;
+uint32_t analog0:1;
+uint32_t analog1:1;
+uint32_t analog2:1;
+uint32_t analog3:1;
 uint32_t saveSettings:1;
 uint32_t sendConfig:1;
 uint32_t lcdRefreshRequest:1;
