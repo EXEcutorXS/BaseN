@@ -57,7 +57,7 @@ UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
 
-extern Logo[];
+extern uint8_t Logo[];
 const uint32_t version = 0x08082021;
 
 const uint32_t bandWidth[10] = { 7800, 10400, 15600, 20800, 31200, 41700, 62500, 125000, 250000, 500000 };
@@ -2564,6 +2564,7 @@ int main(void)
 	while (1)
 		{
 
+
 			HAL_IWDG_Refresh (&hiwdg);
 
 			blinkProvider = HAL_GetTick () % 1000 > 500;
@@ -2575,8 +2576,8 @@ int main(void)
 			secondRoutine ();
 			alarmRoutine ();
 			ledRoutine ();
-			airCounter ();
-			NetRoutine (&netHandler);
+			//airCounter ();
+			//NetRoutine (&netHandler);
 			SX127X_Routine (&myRadio);
 
 			if (flag.lcdRefreshRequest)

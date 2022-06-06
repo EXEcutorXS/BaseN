@@ -72,3 +72,10 @@ Core/Src/sx127x.o: C:/workspace/sx127x/sx127x.c Core/Src/subdir.mk
 Core/Src/ws2812.o: C:/workspace/ws2812/ws2812.c Core/Src/subdir.mk
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I"C:/workspace/common" -I"C:/workspace/otisProtocol" -I"C:/workspace/ssd1306buf" -I"C:/workspace/sx127x" -I"C:/workspace/UC1609" -I"C:/workspace/ws2812" -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfloat-abi=soft -mthumb -o "$@"
 
+clean: clean-Core-2f-Src
+
+clean-Core-2f-Src:
+	-$(RM) ./Core/Src/Logo.d ./Core/Src/Logo.o ./Core/Src/Network.d ./Core/Src/Network.o ./Core/Src/UC1609.d ./Core/Src/UC1609.o ./Core/Src/common.d ./Core/Src/common.o ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/myFont.d ./Core/Src/myFont.o ./Core/Src/ssd1306buf.d ./Core/Src/ssd1306buf.o ./Core/Src/stm32f1xx_hal_msp.d ./Core/Src/stm32f1xx_hal_msp.o ./Core/Src/stm32f1xx_it.d ./Core/Src/stm32f1xx_it.o ./Core/Src/sx127x.d ./Core/Src/sx127x.o ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/system_stm32f1xx.d ./Core/Src/system_stm32f1xx.o ./Core/Src/uartBase.d ./Core/Src/uartBase.o ./Core/Src/ws2812.d ./Core/Src/ws2812.o
+
+.PHONY: clean-Core-2f-Src
+
