@@ -734,7 +734,7 @@ void ledFillBlack ()
  * @param None
  * @retval None
  */
-void ledRoutine ()
+void LEDhandler ()
 {
 	uint8_t i = 0;
 
@@ -2035,7 +2035,7 @@ void radioTestTransmit ()
 					flag.lcdRefreshRequest = 1;
 				}
 
-			SX127X_Routine (&myRadio);
+			SX127X_Handler (&myRadio);
 			if (flag.lcdRefreshRequest)
 				{
 					flag.lcdRefreshRequest = 0;
@@ -2075,7 +2075,7 @@ void radioTestReceive ()
 			uint32_t lastMessageReceived = 0;
 			char message[20] = { 0, };
 
-			SX127X_Routine (&myRadio);
+			SX127X_Handler (&myRadio);
 
 			if (flag.uartGotMessage)
 				{
@@ -2190,7 +2190,7 @@ void radioTestPing ()
 					lastSend = HAL_GetTick ();
 				}
 
-			SX127X_Routine (&myRadio);
+			SX127X_Handler (&myRadio);
 
 //Handle LED
 			for (i = 0; i < 9; i++)
@@ -2274,7 +2274,7 @@ void radioSignalIndicator ()
 			clearStrings ();
 			sprintf (string[0], "RSSI Meter");
 			sprintf (string[1], "RSSI:%4d C:%d", rssi, scale);
-			SX127X_Routine (&myRadio);
+			SX127X_Handler (&myRadio);
 			updateLcd ();
 			wsSetColor (0, BLACK);
 			if (myRadio.signalDetected)
@@ -2575,10 +2575,10 @@ int main(void)
 			halfSecondRoutine ();
 			secondRoutine ();
 			alarmRoutine ();
-			ledRoutine ();
+			LEDhandler ();
 			//airCounter ();
 			//NetRoutine (&netHandler);
-			SX127X_Routine (&myRadio);
+			SX127X_Handler (&myRadio);
 
 			if (flag.lcdRefreshRequest)
 				{

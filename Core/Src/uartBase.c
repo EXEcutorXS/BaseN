@@ -16,8 +16,8 @@ extern uint8_t uartIn;
 extern uint16_t version;
 extern NetHandler_t netHandler;
 
-uint8_t uartRx[128];
-uint8_t uartPos;
+uint8_t uartBuffer[128];
+uint8_t uartWritePos;
 uint8_t len;
 uint8_t nodeNum;
 
@@ -28,32 +28,32 @@ void uartInit() {
 void readByte(void) {
 	switch (uartIn) {
 	case '<':
-		uartPos = 0;
+		uartWritePos = 0;
 		break;
 
 	case '>':
-		len = uartPos;
-		uartRx[uartPos] = 0;
+		len = uartWritePos;
+		uartBuffer[uartWritePos] = 0;
 		flag.uartGotMessage = 1;
-		uartPos = 0;
+		uartWritePos = 0;
 		break;
 
 	default:
-		uartRx[uartPos++] = uartIn;
+		uartBuffer[uartWritePos++] = uartIn;
 		break;
 	}
-	if (uartPos > 126)
-		uartPos = 126;
+	if (uartWritePos > 126)
+		uartWritePos = 126;
 }
 
 void uartReceiveHandler() {
 	char tempString[20];
 
 	uint8_t l = len - 1;
-	uint8_t *ptr = uartRx + 1;
+	uint8_t *ptr = uartBuffer + 1;
 
 	if (HAL_GetTick() - configTime > 500) //First half second after node configuring saving incoming data into node var
-		switch (uartRx[0]) {
+		switch (uartBuffer[0]) {
 		case UART_FREQUENCY:
 			settings.realFrequency = DecToInt(ptr, l);
 			break;
@@ -176,7 +176,7 @@ void uartReceiveHandler() {
 			break;
 		}
 	else {
-		switch (uartRx[0]) {
+		switch (uartBuffer[0]) {
 		case UART_FREQUENCY:
 			nodeSettings.realFrequency = DecToInt(ptr, l);
 			break;
